@@ -36,10 +36,17 @@ function isValidUserName(name: string): boolean {
 }
 //----------------------------------------------------------------
 app.get("/", (req, res) => {
-	res.send("Hello World!");
+	const user: IUser = req.body.user;
+	const { name, email, password } = user || {};
+	const msg: string = `Hello world`;
+	res.send({
+		msg,
+		status: "success",
+		data: user,
+	});
 });
 
-app.post("/new", async (req, res) => {
+app.post("/", async (req, res) => {
 	try {
 		const user: IUser = req.body.user;
 		const { name, email, password } = user || {}; //doubt
